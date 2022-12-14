@@ -31,6 +31,31 @@ let lightColor = (element, number) => {
     }, number - 250);
 
     setTimeout(() => {
-        
-    }, timeout);
+        element.classList.remove('selected');
+    });
+}
+
+let checkOrder = () => {
+    for(let i in clickedOrder) {
+        if (clickedOrder[i] != order[i]) {
+            localStorage();
+            break;
+        }
+    }
+
+    if (clickedOrder.length == order.length) {
+        alert(`Pontuação: ${score}\nVocê acertou! Iniciando próximo nível!`);
+        nextLevel();
+    }
+}
+
+let click = (color) => {
+    clickedOrder[clickedOrder.length] = color;
+    createColorElement(color).classList.add('selected');
+
+    setTimeout(() => {
+        createColorElement(color).classList.remove('selected');
+    });
+
+    checkOrder();
 }
